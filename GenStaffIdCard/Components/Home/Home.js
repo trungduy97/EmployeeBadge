@@ -15,7 +15,7 @@ import { HeaderComponent } from "../Navigator/HeaderComponent";
 
 var { height, width } = Dimensions.get("window");
 
-export default class Home extends Component {
+export class Home extends Component {
   render() {
     return (
       <View style={styles.container}>

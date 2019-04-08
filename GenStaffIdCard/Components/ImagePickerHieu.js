@@ -9,6 +9,7 @@ import {
   Image,
   Button,
 } from 'react-native';
+import ViewShot from "react-native-view-shot";
 import ImagePicker from 'react-native-image-picker'
 export default class ImagePickerHieu extends Component {
  
@@ -117,6 +118,10 @@ export default class ImagePickerHieu extends Component {
               <Text>Select a Video</Text>
             </View>
           </TouchableOpacity>
+  
+          <ViewShot ref="viewShot" options={{ format: "jpg", quality: 0.9 }}>
+           <Text>...Something to rasterize...</Text>
+         </ViewShot>
   
           {this.state.videoSource && (
             <Text style={{ margin: 8, textAlign: 'center' }}>
