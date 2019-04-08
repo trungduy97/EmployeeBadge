@@ -4,9 +4,10 @@
 import React, { Component } from 'react';
 import {AppRegistry} from 'react-native';
 import App from './App';
-import Splash from './Components/Splash'
 import {name as appName} from './app.json';
-
+import ImagePickerHieu from './components/ImagePickerHieu'
+import Splash from './components/Splash'
+import DrawerNavigator from './components/Navigator/DrawerNavigator'
 
 class Main extends Component {
     constructor(props) {

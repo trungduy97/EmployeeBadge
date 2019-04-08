@@ -11,6 +11,7 @@ import {
 import { Footer } from "./Footer";
 import { SlideImage } from "./SlideImage";
 import { Card } from "./Card";
+import { HeaderComponent } from "../Navigator/HeaderComponent";
 
 var { height, width } = Dimensions.get("window");
 
@@ -18,7 +19,7 @@ export class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Footer />
+        <HeaderComponent />
         <SlideImage />
         <Card />
       </View>

@@ -16,7 +16,7 @@ import {
   Dimensions
 } from 'react-native'
 
-import { Home } from './Components/Home/Home'
+import { Home } from './components/Home/Home'
 
 import ImagePicker from 'react-native-image-picker'
 
@@ -93,3 +93,4 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 })
+
