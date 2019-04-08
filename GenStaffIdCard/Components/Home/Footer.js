@@ -15,7 +15,7 @@ export class Footer extends Component {
       <View style={styles.footer}>
         <Image
           style={styles.imageIcon}
-          source={require('../../img/iconhome.png')}
+          source={require('../../img/menu.png')}
         />
         <Text style={styles.text}>Home</Text>
       </View>
@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   imageIcon: {
-    marginTop: 15,
+    marginTop: 10,
     marginLeft: 15,
-    width: 35,
-    height: 35
+    width: 30,
+    height: 30
   }
 })
