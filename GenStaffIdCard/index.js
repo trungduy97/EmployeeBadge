@@ -6,7 +6,7 @@ import {AppRegistry} from 'react-native';
 import App from './App';
 import Splash from './Components/Splash'
 import {name as appName} from './app.json';
-
+import TabNavigator from './Components/Navigation/App'
 
 class Main extends Component {
     constructor(props) {
@@ -14,12 +14,12 @@ class Main extends Component {
         this.state = {currentScreen : 'Splash'};
         setTimeout(()=>{
             this.setState({currentScreen : 'App'})
-        }, 3000)
+        }, 5000)
     }
 
     render(){
         const { currentScreen } = this.state
-        let mainScreen = currentScreen === 'Splash' ? <Splash/> : <App/>
+        let mainScreen = currentScreen === 'Splash' ? <Splash/> : <TabNavigator/>
         return mainScreen;
     }
 }

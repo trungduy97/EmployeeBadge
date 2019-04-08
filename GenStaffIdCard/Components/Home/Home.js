@@ -14,7 +14,7 @@ import { Card } from "./Card";
 
 var { height, width } = Dimensions.get("window");
 
-export class Home extends Component {
+export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
