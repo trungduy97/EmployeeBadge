@@ -14,16 +14,17 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,17 +44,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PreviewNameCardActivity extends AppCompatActivity {
-    ConstraintLayout root;
-    TextView txtName, txtPos, txtTele, txtMobi, txtFax, txtEmail, txtAdd;
-    Button btnCrop;
+
+    @BindView(R.id.txtFullname) TextView txtName;
+    @BindView(R.id.txtPosition) TextView txtPos;
+    @BindView(R.id.txtTel) TextView txtTele;
+    @BindView(R.id.txtMobile) TextView txtMobi;
+    @BindView(R.id.txtFax) TextView txtFax;
+    @BindView(R.id.txtEmail) TextView txtEmail;
+    @BindView(R.id.txtAdd) TextView txtAdd;
+    @BindView(R.id.buttonCrop) Button btnCrop;
+    @BindView(R.id.root) ConstraintLayout root;
+
     int RESULT_SEND_EMAIL_CARD=998;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_name_card);
+        ButterKnife.bind(this);
+
+
         getSupportActionBar().hide();
-        init();
+
         getData();
 
 
@@ -68,17 +83,6 @@ public class PreviewNameCardActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
-        txtName = (TextView)findViewById(R.id.txtFullname);
-        txtPos = (TextView)findViewById(R.id.txtPosition);
-        txtTele = (TextView)findViewById(R.id.txtTel);
-        txtMobi = (TextView)findViewById(R.id.txtMobile);
-        txtFax = (TextView)findViewById(R.id.txtFax);
-        txtEmail = (TextView)findViewById(R.id.txtEmail);
-        txtAdd = (TextView)findViewById(R.id.txtAdd);
-        btnCrop = (Button)findViewById(R.id.buttonCrop);
-        root = (ConstraintLayout) findViewById(R.id.root);
-    }
 
     private void getData(){
         Intent intent = getIntent();

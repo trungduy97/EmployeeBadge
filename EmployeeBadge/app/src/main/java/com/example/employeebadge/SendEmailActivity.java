@@ -1,6 +1,6 @@
 package com.example.employeebadge;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 
@@ -10,12 +10,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
-import android.text.TextUtils;
-import android.view.View;
+import androidx.core.app.ActivityCompat;
+
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;

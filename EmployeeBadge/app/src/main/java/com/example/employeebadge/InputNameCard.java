@@ -1,22 +1,33 @@
 package com.example.employeebadge;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ViewFlipper;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class InputNameCard extends AppCompatActivity {
-    EditText edtName, edtPos, edtTele, edtMobi, edtFax, edtEmail, edtAddress;
-    Button btnPreview;
+    @BindView(R.id.edtFullName) EditText edtName;
+    @BindView(R.id.edtPosition) EditText edtPos;
+    @BindView(R.id.edtTelephone) EditText edtTele;
+    @BindView(R.id.edtMobilephone) EditText edtMobi;
+    @BindView(R.id.edtFax) EditText edtFax;
+    @BindView(R.id.edtEmail) EditText edtEmail;
+    @BindView(R.id.edtAddress) EditText edtAddress;
+    @BindView(R.id.buttonPreview) Button btnPreview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_name_card);
-        getSupportActionBar().hide();
+        ButterKnife.bind(this);
 
-        init();
+        getSupportActionBar().hide();
 
         btnPreview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,16 +37,6 @@ public class InputNameCard extends AppCompatActivity {
         });
     }
 
-    private void init(){
-        edtName = (EditText)findViewById(R.id.edtFullName);
-        edtPos = (EditText)findViewById(R.id.edtPosition);
-        edtTele = (EditText)findViewById(R.id.edtTelephone);
-        edtMobi = (EditText)findViewById(R.id.edtMobilephone);
-        edtFax = (EditText)findViewById(R.id.edtFax);
-        edtEmail = (EditText)findViewById(R.id.edtEmail);
-        edtAddress = (EditText)findViewById(R.id.edtAddress);
-        btnPreview = (Button)findViewById(R.id.buttonPreview);
-    }
 
     private void moveToPreview(){
         Intent intent = new Intent(InputNameCard.this, PreviewNameCardActivity.class);

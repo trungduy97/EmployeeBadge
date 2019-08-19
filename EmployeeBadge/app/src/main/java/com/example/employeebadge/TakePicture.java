@@ -1,6 +1,6 @@
 package com.example.employeebadge;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -15,8 +15,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -24,6 +24,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
+
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.employeebadge.util.ScreenshotType;
@@ -35,23 +37,28 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TakePicture extends AppCompatActivity {
-    ConstraintLayout rootContent;
-    Button btnTake;
-    SubsamplingScaleImageView imgAvata;
-    TextView txtName, txtId, txtPosition;
+
+    @BindView(R.id.rootView) ConstraintLayout rootContent;
+    @BindView(R.id.btnTake) Button btnTake;
+    @BindView(R.id.imgAvata)  SubsamplingScaleImageView imgAvata;
+    @BindView(R.id.txtName) TextView txtName;
+    @BindView(R.id.txtId) TextView txtId;
+    @BindView(R.id.txtPosition) TextView txtPosition;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
+        ButterKnife.bind(this);
         getSupportActionBar().hide();
 
-        btnTake = (Button)findViewById(R.id.btnTake);
-        rootContent = (ConstraintLayout)findViewById(R.id.rootView);
-        imgAvata = (SubsamplingScaleImageView)findViewById(R.id.imgAvata);
-        txtName = (TextView) findViewById(R.id.txtName);
-        txtId = (TextView)findViewById(R.id.txtId);
-        txtPosition = (TextView)findViewById(R.id.txtPosition);
 
         //set font
         Typeface tf = Typeface.createFromAsset(getAssets(),

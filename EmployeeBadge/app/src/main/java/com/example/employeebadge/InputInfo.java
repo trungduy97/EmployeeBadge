@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,6 +19,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ly.img.android.pesdk.assets.filter.basic.FilterPackBasic;
 import ly.img.android.pesdk.assets.font.basic.FontPackBasic;
 import ly.img.android.pesdk.assets.frame.basic.FramePackBasic;
@@ -43,9 +43,14 @@ import ly.img.android.serializer._3._0._0.PESDKFileWriter;
 
 
 public class InputInfo extends AppCompatActivity implements PermissionRequest.Response{
-    Button btnContinue;
-    ImageView imageView;
-    EditText txtName, txtId, txtPosition;
+
+    @BindView(R.id.button) Button btnContinue;
+    @BindView(R.id.imageView2) ImageView imageView;
+    @BindView(R.id.txtName) EditText txtName;
+    @BindView(R.id.txtId) EditText txtId;
+    @BindView(R.id.txtPosition) EditText txtPosition;
+
+
 
     // Important permission request for Android 6.0 and above, don't forget to add this!
     @Override
@@ -107,12 +112,9 @@ public class InputInfo extends AppCompatActivity implements PermissionRequest.Re
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_info);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        btnContinue = (Button) findViewById(R.id.button);
-        imageView =(ImageView)findViewById(R.id.imageView2);
-        txtName = (EditText)findViewById(R.id.txtName);
-        txtId = (EditText)findViewById(R.id.txtId);
-        txtPosition = (EditText)findViewById(R.id.txtPosition);
+        ButterKnife.bind(this);
+
+
 
         txtName.addTextChangedListener(new TextWatcher() {
 

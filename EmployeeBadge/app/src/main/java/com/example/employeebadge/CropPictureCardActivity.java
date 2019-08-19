@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,21 +26,24 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CropPictureCardActivity extends AppCompatActivity {
-    ConstraintLayout constraintLayout;
-    Button btnCropImage;
+
+    @BindView(R.id.rootView) ConstraintLayout constraintLayout;
+    @BindView(R.id.imagePictureCard) SubsamplingScaleImageView imagePictureCard;
+    @BindView(R.id.btnCropImg) Button btnCropImage;
+
+
     String imgPath = "", numberId = "", name = "", position = "";
-    SubsamplingScaleImageView imagePictureCard;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_picture_card);
-
-        constraintLayout = (ConstraintLayout)findViewById(R.id.rootView);
-        btnCropImage = (Button) findViewById(R.id.btnCropImg);
-        imagePictureCard = (SubsamplingScaleImageView) findViewById(R.id.imagePictureCard);
+        ButterKnife.bind(this);
 
         getData();
 
