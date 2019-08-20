@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7CD0E2"
-    tools:context=".SendEmailActivity">
+    tools:context=".ui.activity.SendEmailActivity">
 
     <EditText
         android:id="@+id/txtMail"

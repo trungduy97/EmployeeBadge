@@ -17,14 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".GalleryThemeActivity">
+        <activity android:name=".ui.activity.GalleryThemeActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,18 +32,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PreviewNameCardActivity"
+            android:name=".ui.activity.PreviewNameCardActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".InputNameCard" />
-        <activity android:name=".CropPictureCardActivity" />
-        <activity android:name=".SendEmailActivity" />
-        <activity android:name=".TakePicture" />
+        <activity android:name=".ui.activity.InputNameCardActivity" />
+        <activity android:name=".ui.activity.CropPictureCardActivity" />
+        <activity android:name=".ui.activity.SendEmailActivity" />
+        <activity android:name=".ui.activity.CropCardActivity" />
         <activity
-            android:name=".InputInfo"
-            android:label="@string/title_activity_input_info"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.activity.InputInfoActivity"
+            android:label="@string/title_activity_input_info" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root"
-    tools:context=".PreviewNameCardActivity">
+    tools:context=".ui.activity.PreviewNameCardActivity">
 
     <TextView
         android:id="@+id/textView2"
