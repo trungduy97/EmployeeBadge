@@ -115,7 +115,6 @@ public class InputInfo extends AppCompatActivity implements PermissionRequest.Re
         ButterKnife.bind(this);
 
 
-
         txtName.addTextChangedListener(new TextWatcher() {
 
             @Override

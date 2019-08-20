@@ -18,7 +18,9 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.employeebadge.util.ScreenshotType;
 import com.example.employeebadge.util.ScreenshotUtils;
+import com.example.employeebadge.util.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageActivity;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -77,6 +79,8 @@ public class CropPictureCardActivity extends AppCompatActivity {
         CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setMultiTouchEnabled(true)
+                .setMinCropResultSize((int) Utils.convertDpToPixel(280, this), (int)Utils.convertDpToPixel(367, this))
+                .setMaxCropResultSize((int)Utils.convertDpToPixel(280, this), (int)Utils.convertDpToPixel(367, this))
                 .start(this);
     }
 

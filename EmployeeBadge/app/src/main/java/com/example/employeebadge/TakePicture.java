@@ -30,6 +30,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.employeebadge.util.ScreenshotType;
 import com.example.employeebadge.util.ScreenshotUtils;
+import com.example.employeebadge.util.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -104,6 +105,8 @@ public class TakePicture extends AppCompatActivity {
         CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setMultiTouchEnabled(true)
+                .setMinCropResultSize(Utils.getScreenWidth(this), (int)Utils.convertDpToPixel(594, this))
+                .setMaxCropResultSize(Utils.getScreenWidth(this), (int)Utils.convertDpToPixel(594, this))
                 .start(this);
     }
 
