@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         emailSignInButton.setOnClickListener(this);
         mEmailField.setText("imt@gmail.com");
-        mPasswordField.setText("123456");
+//        mPasswordField.setText("123456");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
     }
@@ -113,9 +113,13 @@ public class LoginActivity extends AppCompatActivity implements
         int i = v.getId();
 
         if (i == R.id.emailSignInButton) {
-            showLoadingDialog();
-            Utils.hideSoftKeyboard(this);
-            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            if (TextUtils.isEmpty(mPasswordField.getText().toString()) || TextUtils.isEmpty(mEmailField.getText().toString())) {
+                Toast.makeText(this, "Vui lòng nhập tài khoản và mật khẩu", Toast.LENGTH_SHORT).show();
+            } else {
+                showLoadingDialog();
+                Utils.hideSoftKeyboard(this);
+                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            }
         }
     }
 

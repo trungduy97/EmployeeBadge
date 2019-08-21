@@ -9,6 +9,17 @@ import org.parceler.Parcel;
     private String name;
     private String id;
     private String position;
+    private String path;
+    private int pos;
+
+    public Card() {}
+
+    public Card(String name, String id, String position, String path) {
+        this.name = name;
+        this.id = id;
+        this.position = position;
+        this.path = path;
+    }
 
     public String getName() {
         return name;
@@ -32,5 +43,21 @@ import org.parceler.Parcel;
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
     }
 }

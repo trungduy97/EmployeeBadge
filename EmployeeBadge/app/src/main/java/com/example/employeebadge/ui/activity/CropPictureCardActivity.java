@@ -17,11 +17,14 @@ import android.widget.Toast;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.employeebadge.R;
+import com.example.employeebadge.model.Card;
 import com.example.employeebadge.util.ScreenshotType;
 import com.example.employeebadge.util.ScreenshotUtils;
 import com.example.employeebadge.util.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.parceler.Parcels;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,6 +50,7 @@ public class CropPictureCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crop_picture_card);
         ButterKnife.bind(this);
 
+        Utils.savePreferences("check", "0", getBaseContext());
         getData();
 
         imagePictureCard.setImage(ImageSource.uri(Uri.fromFile(new File(imgPath))));
@@ -57,6 +61,15 @@ public class CropPictureCardActivity extends AppCompatActivity {
                 takeScreenshot(ScreenshotType.FULL);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if ("1".equals(Utils.getValue("check", getBaseContext()))) {
+            takeScreenshot(ScreenshotType.FULL);
+            Utils.savePreferences("check", "0", getBaseContext());
+        }
     }
 
     private void takeScreenshot(ScreenshotType screenshotType) {
@@ -100,12 +113,12 @@ public class CropPictureCardActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(CropPictureCardActivity.this, CropCardActivity.class);
-                intent.putExtra("imagePath", imgPath);
-                intent.putExtra("name", name);
-                intent.putExtra("id", numberId);
-                intent.putExtra("position", position);
-                startActivity(intent);
+                Bundle arg = new Bundle();
+                Card card = new Card(name, numberId, position, imgPath);
+                arg.putParcelable("CARD", Parcels.wrap(card));
+                Intent starter = new Intent(CropPictureCardActivity.this, GalleryThemesActivity.class);
+                starter.putExtras(arg);
+                startActivity(starter);
             }
         }
     }

@@ -1,6 +1,10 @@
 package com.example.employeebadge.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -22,21 +26,27 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.employeebadge.R;
+import com.example.employeebadge.model.Card;
+import com.example.employeebadge.model.Theme;
 import com.example.employeebadge.util.ScreenshotType;
 import com.example.employeebadge.util.ScreenshotUtils;
 import com.example.employeebadge.util.Utils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.parceler.Parcels;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +59,9 @@ public class CropCardActivity extends AppCompatActivity {
     @BindView(R.id.txtName) TextView txtName;
     @BindView(R.id.txtId) TextView txtId;
     @BindView(R.id.txtPosition) TextView txtPosition;
+    @BindView(R.id.linearLayout) LinearLayout linearLayout;
 
+    Card card = new Card();
 
 
 
@@ -58,6 +70,7 @@ public class CropCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
         ButterKnife.bind(this);
+        setArgument();
         getSupportActionBar().hide();
 
 
@@ -76,13 +89,39 @@ public class CropCardActivity extends AppCompatActivity {
         });
     }
 
+    private void setArgument() {
+        Bundle arg = getIntent().getExtras();
+        if (arg == null) {
+            throw new IllegalArgumentException(
+                    "MUST create CropCardActivity starter static function");
+        }
+        card = Parcels.unwrap(arg.getParcelable("CARD"));
+        if (card == null) {
+            throw new NullPointerException(
+                    "No ARG_CLASS_INFO provided for CropCardActivity creation.");
+        }
+    }
+
     private void setImgAvata(){
-        Intent intent = getIntent();
-        String imagePath = intent.getStringExtra("imagePath");
-        txtName.setText(intent.getStringExtra("name"));
-        txtId.setText(intent.getStringExtra("id"));
-        txtPosition.setText(intent.getStringExtra("position"));
-        imgAvata.setImage(ImageSource.uri(Uri.fromFile(new File(imagePath))));
+        txtName.setText(card.getName());
+        txtId.setText(card.getId());
+        txtPosition.setText(card.getPosition());
+        imgAvata.setImage(ImageSource.uri(Uri.fromFile(new File(card.getPath()))));
+
+        ArrayList<Theme> listThemes = new ArrayList<>();
+        Cursor cursor = GalleryThemesActivity.sqLiteHelper.getData("SELECT * FROM THEME");
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            byte[] image = cursor.getBlob(2);
+
+            listThemes.add(new Theme(name, image, id));
+        }
+
+        byte[] img = listThemes.get(card.getPos()).getImage();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+        BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
+        linearLayout.setBackground(ob);
     }
 
     private void takeScreenshot(ScreenshotType screenshotType) {
