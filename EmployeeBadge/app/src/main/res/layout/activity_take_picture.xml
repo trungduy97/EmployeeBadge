@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg12"
+    android:background="#ffffff"
     tools:context=".ui.activity.CropCardActivity">
 
     <ImageView
@@ -28,6 +28,7 @@
         android:layout_height="438dp"
         android:background="@drawable/backgroundimage"
         android:orientation="vertical"
+        android:elevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,24 +97,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         android:background="#ffffff"
+        android:elevation="2dp"
         app:srcCompat="@drawable/link" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#000000"
         android:alpha="0.3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"/>
+        android:background="#000000"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="45dp"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="horizontal"
         android:weightSum="2"
+        android:elevation="2dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,15 +125,25 @@
 
         <Button
             android:id="@+id/btnTake"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
             android:layout_weight="2"
-            android:background="@drawable/custome_background_button"
+            android:background="@drawable/bg_button"
             android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:elevation="2dp"
             android:layout_marginRight="5dp"
             android:text="CROP IMAGE" />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0.5"
+        android:src="@drawable/bg_intro"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

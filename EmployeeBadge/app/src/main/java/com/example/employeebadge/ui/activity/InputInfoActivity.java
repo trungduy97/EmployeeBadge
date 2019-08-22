@@ -48,7 +48,6 @@ import ly.img.android.serializer._3._0._0.PESDKFileWriter;
 public class InputInfoActivity extends AppCompatActivity implements PermissionRequest.Response{
 
     @BindView(R.id.button) Button btnContinue;
-    @BindView(R.id.imageView2) ImageView imageView;
     @BindView(R.id.txtName) EditText txtName;
     @BindView(R.id.txtId) EditText txtId;
     @BindView(R.id.txtPosition) EditText txtPosition;
@@ -116,7 +115,7 @@ public class InputInfoActivity extends AppCompatActivity implements PermissionRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_info);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Name Card");
 
         txtName.addTextChangedListener(new TextWatcher() {
 

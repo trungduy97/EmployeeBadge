@@ -50,6 +50,8 @@ public class CropPictureCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crop_picture_card);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setTitle("Picture");
+
         Utils.savePreferences("check", "0", getBaseContext());
         getData();
 

@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.viewSlide) ViewFlipper viewSlide;
     @BindView(R.id.rltPicture) RelativeLayout picture;
     @BindView(R.id.rltNameCard) RelativeLayout nameCard;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -37,12 +36,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-        int images[] = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f};
-
-        for (int image : images){
-            changeSlide(image);
-        }
 
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -136,13 +129,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void changeSlide(int image){
-        ImageView imageView =  new ImageView(this);
-        imageView.setBackgroundResource(image);
-        viewSlide.addView(imageView);
-        viewSlide.setFlipInterval(3000);
-        viewSlide.setAutoStart(true);
-        viewSlide.setInAnimation(this, android.R.anim.slide_in_left);
-        viewSlide.setOutAnimation(this, android.R.anim.slide_out_right);
-    }
 }

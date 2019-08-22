@@ -28,7 +28,7 @@ public class InputNameCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_name_card);
         ButterKnife.bind(this);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Name Card Details");
 
         btnPreview.setOnClickListener(new View.OnClickListener() {
             @Override

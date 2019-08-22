@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7CD0E2"
+    android:background="#ffffff"
     tools:context=".ui.activity.SendEmailActivity">
 
     <EditText
@@ -21,6 +21,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +30,7 @@
     <Button
         android:id="@+id/btnSend"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="40dp"
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
@@ -58,5 +60,16 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSend"
+        app:srcCompat="@drawable/bg_intro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/fieldEmail"
-        android:layout_width="351dp"
+        android:layout_width="345dp"
         android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
@@ -43,12 +43,13 @@
         android:drawableLeft="@drawable/ic_user"
         android:drawablePadding="10dp"
         android:textColorHint="#0078D7"
+        android:layout_gravity="center_horizontal"
         />
 
 
     <EditText
         android:id="@+id/fieldPassword"
-        android:layout_width="351dp"
+        android:layout_width="345dp"
         android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
@@ -67,15 +68,18 @@
         android:drawableLeft="@drawable/ic_lock"
         android:textColorHint="#0078D7"
         android:drawablePadding="10dp"
+        android:layout_gravity="center_horizontal"
         />
 
     <Button
         android:id="@+id/emailSignInButton"
-        android:layout_width="351dp"
+        android:layout_width="345dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/ic_bg_btn"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal"
+        />
 
 
 </LinearLayout>

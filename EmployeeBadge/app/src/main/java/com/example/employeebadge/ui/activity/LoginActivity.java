@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         emailSignInButton.setOnClickListener(this);
         mEmailField.setText("imt@gmail.com");
-//        mPasswordField.setText("123456");
+        mPasswordField.setText("123456");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         Utils.hideSoftKeyboard(this);
