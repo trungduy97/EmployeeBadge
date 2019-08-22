@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements
 //        mPasswordField.setText("123456");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        Utils.hideSoftKeyboard(this);
     }
 
     @Override
