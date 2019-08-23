@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,27 +12,35 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:src="@drawable/bg_intro"
+        android:layout_height="0dp"
         android:scaleType="fitXY"
-        />
+        android:src="@drawable/bg_intro"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <RelativeLayout
             android:id="@+id/rltPicture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginEnd="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="30dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_picturecard"
-        >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgPicture"
@@ -41,31 +49,30 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
                 android:src="@drawable/ic_camera" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PICTURE"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:textColor="#ffffff"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/imgPicture"
-                />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="PICTURE"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rltNameCard"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="30dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_picturecard"
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgNamecard"
@@ -74,18 +81,18 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
                 android:src="@drawable/ic_namecard" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NAME CARD"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:textColor="#ffffff"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/imgNamecard"
-                />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="NAME CARD"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
