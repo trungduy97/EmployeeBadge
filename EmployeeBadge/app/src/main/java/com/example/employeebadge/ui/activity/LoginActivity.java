@@ -11,13 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.employeebadge.R;
 import com.example.employeebadge.util.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         emailSignInButton.setOnClickListener(this);
         mEmailField.setText("imt@gmail.com");
-        mPasswordField.setText("123456");
+//        mPasswordField.setText("123456");
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         Utils.hideSoftKeyboard(this);
@@ -56,6 +59,33 @@ public class LoginActivity extends AppCompatActivity implements
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
+//    private void changePass() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        user.getEmail();
+//        AuthCredential credential = EmailAuthProvider
+//                .getCredential("imt@gmail.com", "123456789");
+//
+//        user.reauthenticate(credential)
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            user.updatePassword("123456").addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "Password updated");
+//                                    } else {
+//                                        Log.d(TAG, "Error password not updated");
+//                                    }
+//                                }
+//                            });
+//                        } else {
+//                            Log.d(TAG, "Error auth failed");
+//                        }
+//                    }
+//                });
+//    }
 
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);

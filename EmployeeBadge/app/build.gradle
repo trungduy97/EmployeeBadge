@@ -105,6 +105,9 @@ dependencies {
     // Parceler library
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
+
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

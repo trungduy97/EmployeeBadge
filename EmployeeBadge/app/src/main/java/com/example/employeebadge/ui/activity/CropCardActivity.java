@@ -50,6 +50,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CropCardActivity extends AppCompatActivity {
 
@@ -59,6 +60,14 @@ public class CropCardActivity extends AppCompatActivity {
     @BindView(R.id.txtName) TextView txtName;
     @BindView(R.id.txtId) TextView txtId;
     @BindView(R.id.txtPosition) TextView txtPosition;
+    @BindView(R.id.card1) LinearLayout card1;
+
+    @BindView(R.id.imgAvatar2) CircleImageView imgAvatar2;
+    @BindView(R.id.txtName2) TextView txtName2;
+    @BindView(R.id.txtId2) TextView txtId2;
+    @BindView(R.id.txtPosition2) TextView txtPosition2;
+    @BindView(R.id.card2) LinearLayout card2;
+
     @BindView(R.id.linearLayout) LinearLayout linearLayout;
 
     Card card = new Card();
@@ -103,25 +112,46 @@ public class CropCardActivity extends AppCompatActivity {
     }
 
     private void setImgAvata(){
-        txtName.setText(card.getName());
-        txtId.setText(card.getId());
-        txtPosition.setText(card.getPosition());
-        imgAvata.setImage(ImageSource.uri(Uri.fromFile(new File(card.getPath()))));
+        if (card.getPos() == 0) {
+            card1.setVisibility(View.VISIBLE);
+            card2.setVisibility(View.GONE);
 
-        ArrayList<Theme> listThemes = new ArrayList<>();
-        Cursor cursor = GalleryThemesActivity.sqLiteHelper.getData("SELECT * FROM THEME");
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            byte[] image = cursor.getBlob(2);
 
-            listThemes.add(new Theme(name, image, id));
+            txtName.setText(card.getName());
+            txtId.setText(card.getId());
+            txtPosition.setText(card.getPosition());
+            imgAvata.setImage(ImageSource.uri(Uri.fromFile(new File(card.getPath()))));
+
+            ArrayList<Theme> listThemes = new ArrayList<>();
+            Cursor cursor = GalleryThemesActivity.sqLiteHelper.getData("SELECT * FROM THEME");
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                byte[] image = cursor.getBlob(2);
+
+                listThemes.add(new Theme(name, image, id));
+            }
+
+            byte[] img = listThemes.get(card.getPos()).getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+            BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
+            linearLayout.setBackground(ob);
         }
 
-        byte[] img = listThemes.get(card.getPos()).getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
-        BitmapDrawable ob = new BitmapDrawable(getResources(), bitmap);
-        linearLayout.setBackground(ob);
+        if (card.getPos() == 1) {
+            card1.setVisibility(View.GONE);
+            card2.setVisibility(View.VISIBLE);
+
+            txtName2.setText(card.getName());
+            txtId2.setText(card.getId());
+            txtPosition2.setText(card.getPosition());
+            File imgFile = new  File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/pictureimage.png");
+
+            if(imgFile.exists()){
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imgAvatar2.setImageBitmap(myBitmap);
+            }
+        }
     }
 
     private void takeScreenshot(ScreenshotType screenshotType) {

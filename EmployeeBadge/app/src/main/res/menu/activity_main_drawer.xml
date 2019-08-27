@@ -35,4 +35,13 @@
         </menu>
     </item>
 
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_change_pass"
+                android:icon="@drawable/ic_lock_black"
+                android:title="@string/menu_change_pass" />
+        </menu>
+    </item>
+
 </menu>

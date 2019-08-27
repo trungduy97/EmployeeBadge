@@ -122,7 +122,11 @@ public class GalleryThemesActivity extends AppCompatActivity implements Recycler
                 "IMT card default",
                     imageToByte()
             );
-            Toast.makeText(this, "listnull", Toast.LENGTH_SHORT).show();
+
+            sqLiteHelper.insertData(
+                    "SHAREWORK card default",
+                    imageToByte2()
+            );
         }
 
         adapter.notifyDataSetChanged();
@@ -300,6 +304,14 @@ public class GalleryThemesActivity extends AppCompatActivity implements Recycler
 
     public byte[] imageToByte() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.backgroundimage);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
+    public byte[] imageToByte2() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.bgsharework);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();

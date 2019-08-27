@@ -48,7 +48,7 @@ public class ListThemeAdapter extends RecyclerView.Adapter<ListThemeViewHolder> 
         Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
         holder.imgTheme.setImageBitmap(bitmap);
 
-        if ("IMT card default".equals(theme.getName())) {
+        if ("IMT card default".equals(theme.getName()) || "SHAREWORK card default".equals(theme.getName())) {
             holder.btnEdit.setVisibility(View.GONE);
             holder.btnRemove.setVisibility(View.GONE);
         } else {

@@ -8,97 +8,184 @@
     android:background="#ffffff"
     tools:context=".ui.activity.CropCardActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="600dp"
-        android:layout_height="113dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#ffffff"
-        app:srcCompat="@drawable/logotext2"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
-        />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ln"
         android:layout_width="match_parent"
-        android:layout_height="438dp"
-        android:background="@drawable/backgroundimage"
-        android:orientation="vertical"
+        android:layout_height="596dp"
         android:elevation="2dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="175dp"
-            android:layout_height="220dp"
-            android:background="@drawable/custome_background"
-            android:layout_marginTop="45dp"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
             >
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="113dp"
+                android:background="#ffffff"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                app:srcCompat="@drawable/logotext2" />
 
-            <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-                android:id="@+id/imgAvata"
-                android:layout_width="170dp"
-                android:layout_height="220dp"
-                android:layout_gravity="center"
-                android:background="@drawable/border_image"
-                />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="438dp"
+                android:background="@drawable/backgroundimage"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+                <LinearLayout
+                    android:layout_width="175dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="45dp"
+                    android:background="@drawable/custome_background">
+
+                    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+                        android:id="@+id/imgAvata"
+                        android:layout_width="170dp"
+                        android:layout_height="220dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/border_image" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:text="TRUONG THI THANH DOANH"
+                    android:textColor="#fff"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/txtPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="SE I"
+                    android:textColor="#91d7e9"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="123456"
+                    android:textColor="#91d7e9"
+                    android:textSize="26sp" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#ffffff"
+                android:elevation="2dp"
+                app:srcCompat="@drawable/link" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="4dp"
-            android:maxLines="1"
-            android:text="TRUONG THI THANH DOANH"
-            android:textColor="#fff"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:autoSizeTextType="uniform" />
-        <TextView
-            android:id="@+id/txtPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#91d7e9"
-            android:text="SE I"
-            android:textSize="26sp"
-            android:layout_gravity="center_horizontal"
-            />
-        <TextView
-            android:id="@+id/txtId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#91d7e9"
-            android:text="123456"
-            android:textSize="26sp"
-            android:layout_gravity="center_horizontal"
-            />
 
+        <LinearLayout
+            android:id="@+id/card2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:background="@drawable/bgsharework"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+                <LinearLayout
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="145dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/imgAvatar2"
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bgsharework"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:text="TRUONG THI THANH DOANH"
+                    android:textColor="#00384d"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/txtPosition2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="SE I"
+                    android:textColor="#9d4522"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtId2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="123456"
+                    android:textColor="#5d5d5d"
+                    android:textSize="26sp"
+                    android:layout_marginTop="45dp"
+                    android:background="#e5e9e9"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:background="#ffffff"
-        android:elevation="2dp"
-        app:srcCompat="@drawable/link" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -106,7 +193,7 @@
         android:layout_height="1dp"
         android:alpha="0.3"
         android:background="#000000"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/ln" />
 
     <LinearLayout
         android:layout_width="250dp"
@@ -121,7 +208,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
         <Button
             android:id="@+id/btnTake"
