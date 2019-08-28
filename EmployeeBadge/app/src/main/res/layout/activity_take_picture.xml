@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/ln"
         android:layout_width="match_parent"
-        android:layout_height="596dp"
+        android:layout_height="630dp"
         android:elevation="2dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,9 +21,9 @@
         <LinearLayout
             android:id="@+id/card1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="596dp"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             >
             <ImageView
                 android:id="@+id/imageView3"
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@drawable/bgsharework"
             >
             <LinearLayout
