@@ -144,11 +144,11 @@ public class InputInfoActivity extends AppCompatActivity implements PermissionRe
             @Override
             public void onClick(View v) {
 
-                if (TextUtils.isEmpty(txtId.getText().toString()) || TextUtils.isEmpty(txtName.getText().toString()) || TextUtils.isEmpty(txtPosition.getText().toString())) {
-                    Toast.makeText(InputInfoActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
+//                if (TextUtils.isEmpty(txtId.getText().toString()) || TextUtils.isEmpty(txtName.getText().toString()) || TextUtils.isEmpty(txtPosition.getText().toString())) {
+//                    Toast.makeText(InputInfoActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+//                } else {
                     openCamera();
-                }
+//                }
             }
         });
     }

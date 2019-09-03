@@ -21,11 +21,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,9 +69,11 @@ public class CropCardActivity extends AppCompatActivity {
     @BindView(R.id.txtName2) TextView txtName2;
     @BindView(R.id.txtId2) TextView txtId2;
     @BindView(R.id.txtPosition2) TextView txtPosition2;
-    @BindView(R.id.card2) LinearLayout card2;
+    @BindView(R.id.card2) FrameLayout card2;
 
     @BindView(R.id.linearLayout) LinearLayout linearLayout;
+
+    @BindView(R.id.imagePictureCard) SubsamplingScaleImageView imagePictureCard;
 
     Card card = new Card();
 
@@ -149,7 +154,14 @@ public class CropCardActivity extends AppCompatActivity {
 
             if(imgFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imgAvatar2.setImageBitmap(myBitmap);
+               // imgAvatar2.setImageBitmap(myBitmap);
+//                imagePictureCard.setImage(ImageSource.uri(Uri.fromFile(imgFile)));
+                imagePictureCard.setImage(ImageSource.uri(Uri.fromFile(new File(card.getPath()))));
+            }
+
+            if (TextUtils.isEmpty(card.getId()) || TextUtils.isEmpty(card.getPosition())) {
+                txtName2.setTextSize(getResources().getDimension(R.dimen.text_size_visitor));
+                txtPosition2.setVisibility(View.GONE);
             }
         }
     }

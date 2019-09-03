@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/fieldEmail"
-        android:layout_width="345dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
@@ -49,7 +49,7 @@
 
     <EditText
         android:id="@+id/fieldPassword"
-        android:layout_width="345dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:clickable="true"
         android:focusable="true"
@@ -73,7 +73,7 @@
 
     <Button
         android:id="@+id/emailSignInButton"
-        android:layout_width="345dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/ic_bg_btn"

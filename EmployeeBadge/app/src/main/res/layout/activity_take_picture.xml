@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/ln"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
+        android:layout_height="596dp"
         android:elevation="2dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="596dp"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             >
             <ImageView
                 android:id="@+id/imageView3"
@@ -64,13 +64,13 @@
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="4dp"
                     android:maxLines="1"
-                    android:text="TRUONG THI THANH DOANH"
+                    tools:text="TRUONG THI THANH DOANH"
                     android:textColor="#fff"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="SE I"
+                    tools:text="SE I"
                     android:textColor="#91d7e9"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="123456"
+                    tools:text="123456"
                     android:textColor="#91d7e9"
                     android:textSize="26sp" />
 
@@ -108,14 +108,24 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:background="@drawable/bgsharework"
+
             >
+
+            <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+                android:id="@+id/imagePictureCard"
+                android:layout_width="250dp"
+                android:layout_height="300dp"
+                android:elevation="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:background="@color/colorAccent"
+                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -124,6 +134,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/bgsharework2"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
                 <LinearLayout
@@ -138,30 +149,31 @@
                         android:layout_width="220dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/bgsharework"
+                        android:visibility="gone"
                         />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtName2"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginEnd="4dp"
                     android:maxLines="1"
-                    android:text="TRUONG THI THANH DOANH"
+                    tools:text="TRUONG THI THANH DOANH"
                     android:textColor="#00384d"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    app:autoSizeTextType="uniform" />
+                     />
 
                 <TextView
                     android:id="@+id/txtPosition2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="SE I"
+                    tools:text="SE I"
                     android:textColor="#9d4522"
                     android:textSize="26sp"
                     android:textStyle="bold"
@@ -173,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="123456"
+                    tools:text="123456"
                     android:textColor="#5d5d5d"
                     android:textSize="26sp"
                     android:layout_marginTop="45dp"
@@ -182,7 +194,7 @@
 
 
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 
