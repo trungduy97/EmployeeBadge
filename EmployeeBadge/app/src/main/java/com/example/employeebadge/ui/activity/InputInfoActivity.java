@@ -1,114 +1,59 @@
 package com.example.employeebadge.ui.activity;
-
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.provider.MediaStore;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.example.employeebadge.R;
+import com.example.employeebadge.ui.fragment.CameraBottomSheetDialogFragment;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ly.img.android.pesdk.assets.filter.basic.FilterPackBasic;
-import ly.img.android.pesdk.assets.font.basic.FontPackBasic;
-import ly.img.android.pesdk.assets.frame.basic.FramePackBasic;
-import ly.img.android.pesdk.assets.overlay.basic.OverlayPackBasic;
-import ly.img.android.pesdk.assets.sticker.emoticons.StickerPackEmoticons;
-import ly.img.android.pesdk.assets.sticker.shapes.StickerPackShapes;
-import ly.img.android.pesdk.backend.model.constant.Directory;
-import ly.img.android.pesdk.backend.model.state.CameraSettings;
-import ly.img.android.pesdk.backend.model.state.EditorSaveSettings;
-import ly.img.android.pesdk.backend.model.state.manager.SettingsList;
-import ly.img.android.pesdk.ui.activity.CameraPreviewBuilder;
-import ly.img.android.pesdk.ui.activity.ImgLyIntent;
-import ly.img.android.pesdk.ui.model.state.UiConfigFilter;
-import ly.img.android.pesdk.ui.model.state.UiConfigFrame;
-import ly.img.android.pesdk.ui.model.state.UiConfigOverlay;
-import ly.img.android.pesdk.ui.model.state.UiConfigSticker;
-import ly.img.android.pesdk.ui.model.state.UiConfigText;
-import ly.img.android.pesdk.ui.utils.PermissionRequest;
-import ly.img.android.serializer._3._0._0.PESDKFileWriter;
+
+import static androidx.core.content.FileProvider.getUriForFile;
 
 
-public class InputInfoActivity extends AppCompatActivity implements PermissionRequest.Response{
+public class InputInfoActivity extends AppCompatActivity {
 
     @BindView(R.id.button) Button btnContinue;
     @BindView(R.id.txtName) EditText txtName;
     @BindView(R.id.txtId) EditText txtId;
     @BindView(R.id.txtPosition) EditText txtPosition;
 
+    public static final int PICK_IMAGE_CODE = 100;
 
+    public static final int REQUEST_IMAGE_CAPTURE = 300;
 
-    // Important permission request for Android 6.0 and above, don't forget to add this!
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionRequest.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    public static final int DS_PHOTO_EDITOR_REQUEST_CODE = 200;
 
-    @Override
-    public void permissionGranted() {}
+    private static final int REQUEST_EXTERNAL_STORAGE_CODE = 1000;
 
-    @Override
-    public void permissionDenied() {
-    }
+    public static final String OUTPUT_PHOTO_DIRECTORY = "ds_photo_editor_sample";
 
-    public static int PESDK_RESULT = 1;
-
-    private SettingsList createPesdkSettingsList() {
-
-        // Create a empty new SettingsList and apply the changes on this referance.
-        SettingsList settingsList = new SettingsList();
-
-        settingsList.getSettingsModel(UiConfigFilter.class).setFilterList(
-                FilterPackBasic.getFilterPack()
-        );
-
-        settingsList.getSettingsModel(UiConfigText.class).setFontList(
-                FontPackBasic.getFontPack()
-        );
-
-        settingsList.getSettingsModel(UiConfigFrame.class).setFrameList(
-                FramePackBasic.getFramePack()
-        );
-
-        settingsList.getSettingsModel(UiConfigOverlay.class).setOverlayList(
-                OverlayPackBasic.getOverlayPack()
-        );
-
-        settingsList.getSettingsModel(UiConfigSticker.class).setStickerLists(
-                StickerPackEmoticons.getStickerCategory(),
-                StickerPackShapes.getStickerCategory()
-        );
-
-        // Set custom camera image export settings
-        settingsList.getSettingsModel(CameraSettings.class)
-                .setExportDir(Directory.DCIM, "SomeFolderName")
-                .setExportPrefix("camera_");
-
-        // Set custom editor image export settings
-        settingsList.getSettingsModel(EditorSaveSettings.class)
-                .setExportDir(Directory.DCIM, "SomeFolderName")
-                .setExportPrefix("result_")
-                .setSavePolicy(EditorSaveSettings.SavePolicy.RETURN_ALWAYS_ONLY_OUTPUT);
-
-        return settingsList;
-    }
+    public String fileName ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,73 +88,137 @@ public class InputInfoActivity extends AppCompatActivity implements PermissionRe
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                if (TextUtils.isEmpty(txtId.getText().toString()) || TextUtils.isEmpty(txtName.getText().toString()) || TextUtils.isEmpty(txtPosition.getText().toString())) {
-//                    Toast.makeText(InputInfoActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-//                } else {
-                    openCamera();
-//                }
+                showPaperSizeBottomSheet();
             }
         });
     }
 
-    private void openCamera() {
-        SettingsList settingsList = createPesdkSettingsList();
+    public void showPaperSizeBottomSheet(){
+        CameraBottomSheetDialogFragment paperSizeBottomSheetDialogFragment = CameraBottomSheetDialogFragment.newInstance(new CameraBottomSheetDialogFragment.OnPaperSizeSelectListener() {
+            @Override
+            public void onSelectedPicture() {
+                verifyStoragePermissionsAndPerformOperation(REQUEST_EXTERNAL_STORAGE_CODE);
+            }
 
-        new CameraPreviewBuilder(this)
-                .setSettingsList(settingsList)
-                .startActivityForResult(this, PESDK_RESULT);
+            @Override
+            public void onTakePicture() {
+                takeCameraImage();
+            }
+        });
+        paperSizeBottomSheetDialogFragment.show(getSupportFragmentManager(), "paper_size");
+    }
+
+
+    private void verifyStoragePermissionsAndPerformOperation(int requestPermissionCode) {
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestPermissionCode);
+        }
+        else {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_CODE);
+        }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, android.content.Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PESDK_RESULT) {
-            // Editor has saved an Image.
-            Uri resultURI = data.getParcelableExtra(ImgLyIntent.RESULT_IMAGE_URI);
-            Uri sourceURI = data.getParcelableExtra(ImgLyIntent.SOURCE_IMAGE_URI);
-
-            // Scan result uri to show it up in the Gallery
-            if (resultURI != null) {
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).setData(resultURI));
-            }
-
-            // Scan source uri to show it up in the Gallery
-            if (sourceURI != null) {
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).setData(sourceURI));
-            }
-
-            Log.i("PESDK", "Source image is located here " + sourceURI);
-            Log.i("PESDK", "Result image is located here " + resultURI);
-
-
-            // OPTIONAL: read the latest state to save it as a serialisation
-            SettingsList lastState = data.getParcelableExtra(ImgLyIntent.SETTINGS_LIST);
-            try {
-                new PESDKFileWriter(lastState).writeJson(new File(
-                        Environment.getExternalStorageDirectory(),
-                        "serialisationReadyToReadWithPESDKFileReader.json"
-                ));
-            } catch (IOException e) { e.printStackTrace(); }
-
-            sendData(resultURI);
-
-        } else if (resultCode == RESULT_CANCELED && requestCode == PESDK_RESULT) {
-
-            // Editor was canceled
-           // Uri sourceURI = data.getParcelableExtra(ImgLyIntent.SOURCE_IMAGE_URI);
-
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_CODE);
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("The app needs this permission to edit photos on your device.");
+            builder.setPositiveButton("Update Permission",  new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    verifyStoragePermissionsAndPerformOperation(REQUEST_EXTERNAL_STORAGE_CODE);
+                }
+            });
+            builder.setCancelable(false);
+            builder.create().show();
         }
 
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PICK_IMAGE_CODE:
+                    Uri inputImageUri = data.getData();
+                    if (inputImageUri != null) {
+                        Intent dsPhotoEditorIntent = new Intent(this, DsPhotoEditorActivity.class);
+                        dsPhotoEditorIntent.setData(inputImageUri);
+                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, OUTPUT_PHOTO_DIRECTORY);
+                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+
+                        startActivityForResult(dsPhotoEditorIntent, DS_PHOTO_EDITOR_REQUEST_CODE);
+                    }
+                    else {
+                        Toast.makeText(this, "Please select an image from the Gallery", Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case DS_PHOTO_EDITOR_REQUEST_CODE:
+                    Uri outputUri = data.getData();
+                    sendData(outputUri);
+                    break;
+                case REQUEST_IMAGE_CAPTURE:
+                    Uri inputImageUri2 = getCacheImagePath(fileName);
+                    if (inputImageUri2 != null) {
+                        Intent dsPhotoEditorIntent = new Intent(this, DsPhotoEditorActivity.class);
+                        dsPhotoEditorIntent.setData(inputImageUri2);
+                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, OUTPUT_PHOTO_DIRECTORY);
+                        int[] toolsToHide = {DsPhotoEditorActivity.TOOL_PIXELATE, DsPhotoEditorActivity.TOOL_ORIENTATION};
+                        dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+
+                        startActivityForResult(dsPhotoEditorIntent, DS_PHOTO_EDITOR_REQUEST_CODE);
+                    }
+                    break;
+            }
+        }
     }
 
     private void sendData(Uri imageUri){
         Intent intent = new Intent(InputInfoActivity.this, CropPictureCardActivity.class);
-
         intent.putExtra("imagePath", imageUri.getPath());
         intent.putExtra("name", txtName.getText().toString());
         intent.putExtra("id", txtId.getText().toString());
         intent.putExtra("position", txtPosition.getText().toString());
         startActivity(intent);
+    }
+
+
+    // Hàm lấy ảnh từ camera
+    private void takeCameraImage() {
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            fileName = System.currentTimeMillis() + ".jpg";
+                            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheImagePath(fileName));
+                            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+    private Uri getCacheImagePath(String fileName) {
+        File path = new File(getExternalCacheDir(), "camera");
+        if (!path.exists()) path.mkdirs();
+        File image = new File(path, fileName);
+        return getUriForFile(InputInfoActivity.this, getPackageName() + ".provider", image);
     }
 }

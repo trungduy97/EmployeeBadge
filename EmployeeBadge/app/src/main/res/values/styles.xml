@@ -59,4 +59,12 @@
 
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar"></style>
 
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/PaperBottomSheet</item>
+    </style>
+
+    <style name="PaperBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>
